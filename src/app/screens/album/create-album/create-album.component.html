@@ -1,3 +1,26 @@
-<p>
-  create-album works!
-</p>
+<h1>Create New Album</h1>
+
+<form [formGroup]='albumForm' (ngSubmit)="onSubmit()" >
+  <p>
+    <label>
+      Album Name:
+      <input type="text" formControlName="name">
+    </label>
+  </p>
+  <p>
+    <label>
+      Album Description:
+      <input 
+        type="textarea"
+        rows="10"
+        cols="70" formControlName="description">
+    </label>
+  </p>
+  <p>
+    <label>
+      Date Created:
+      <input type="date" formControlName="date" value="2018-10-13">
+    </label>
+  </p>
+  <button type="submit" [disabled]="!albumForm.valid">Submit</button>
+</form>
