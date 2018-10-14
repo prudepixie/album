@@ -8,6 +8,10 @@ import { CreateAlbumComponent } from './screens/album/create-album/create-album.
 import { HomeComponent } from './screens/home/home.component';
 import { UserComponent } from './screens/user/user.component';
 import { AppRoutingModule } from 'src/app/routes/routes';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database'
 
 @NgModule({
   declarations: [
@@ -20,7 +24,10 @@ import { AppRoutingModule } from 'src/app/routes/routes';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
