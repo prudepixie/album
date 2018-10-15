@@ -11,7 +11,8 @@ import { AppRoutingModule } from 'src/app/routes/routes';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database'
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AlbumComponent } from './screens/album/album.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database'
     NavComponent,
     CreateAlbumComponent,
     HomeComponent,
-    UserComponent
+    UserComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
