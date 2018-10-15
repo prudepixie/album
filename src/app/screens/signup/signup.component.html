@@ -1,0 +1,19 @@
+<!-- TODO: replace with real form soon -->
+<h1>HOME TEST</h1>
+<div *ngFor="let item of items">
+  {{ item }}
+</div>
+
+<div>
+  email
+  <input [(ngModel)]="email" />
+</div>
+<div>
+  password
+  <input [(ngModel)]="password" />
+</div>
+<div>
+  username
+  <input [(ngModel)]="username" />
+</div>
+<button (click)="signup()">SIGNUP</button>
