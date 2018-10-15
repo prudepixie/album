@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './shared/nav/nav.component';
@@ -13,6 +13,9 @@ import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AlbumComponent } from './screens/album/album.component'
+import AuthService from './services/auth.service';
+import { SignupComponent } from './screens/signup/signup.component';
+import { SigninComponent } from './screens/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -21,17 +24,20 @@ import { AlbumComponent } from './screens/album/album.component'
     CreateAlbumComponent,
     HomeComponent,
     UserComponent,
-    AlbumComponent
+    AlbumComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

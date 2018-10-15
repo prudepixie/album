@@ -4,6 +4,7 @@ import { UserComponent } from 'src/app/screens/user/user.component';
 import { HomeComponent } from 'src/app/screens/home/home.component';
 import { CreateAlbumComponent } from 'src/app/screens/album/create-album/create-album.component';
 import { AlbumComponent } from 'src/app/screens/album/album.component';
+import { SignupComponent } from '../screens/signup/signup.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'album', component: CreateAlbumComponent},
   { path: 'albums', component: AlbumComponent },
   { path: '', component: HomeComponent},
+  { path: 'signup', component: SignupComponent},
   { path: '**', redirectTo: ''}
 ]
 
