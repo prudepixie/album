@@ -16,6 +16,10 @@ import { AlbumComponent } from './screens/album/album.component'
 import AuthService from './services/auth.service';
 import { SignupComponent } from './screens/signup/signup.component';
 import { SigninComponent } from './screens/signin/signin.component';
+import { AuthResolver } from './resolvers/auth.resolver';
+import AuthThirdPartyProviderService from './services/auth.third.provider';
+import { AuthGuard } from './services/auth.guard';
+import { FormErrorComponent } from './shared/errors/form-error/form-error.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import { SigninComponent } from './screens/signin/signin.component';
     UserComponent,
     AlbumComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    FormErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,7 @@ import { SigninComponent } from './screens/signin/signin.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthResolver, AuthThirdPartyProviderService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,35 +1,61 @@
 import { AngularFireAuth } from '@angular/fire/auth'
 import { Injectable } from '@angular/core';
 import { MethodCall } from '@angular/compiler';
+import User from '../models/user.model';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+
+const AUTH_SUCCESS_ROUTE = '/albums'
+    , LOGOUT_ROUTE = '/'
 
 @Injectable()
 export default class AuthService {
-  currentUser: {} = {}
+  currentUser: User = null
+  currentUserListener = new Subject()
 
-  constructor(private fireAuth: AngularFireAuth){
+  constructor(private fireAuth: AngularFireAuth, private router: Router){
   }
 
-  // TODO:leaving this for later - auth state change listener
-  // listenForAuthChanges(){
-  //   this.fireAuth.auth.onAuthStateChanged((user) => {
-  //     console.log('auth state changed!', user)
-  //   })
-  // }
+  listenForAuthChanges(){
+    this.fireAuth.auth.onAuthStateChanged((user) => {
 
-  signIn(){
+      console.log('auth state changed..', user)
 
+      if(!user){
+        this.currentUser = null
+        return this.currentUserListener.next(null)
+      } 
+
+      this.currentUser = new User(user.displayName, user.photoURL, user.email)
+      this.currentUserListener.next(this.currentUser)
+    })
+  }
+
+  async signIn(email: string, password: string){
+    try {
+      let { user } = await this.fireAuth.auth.signInWithEmailAndPassword(email, password)
+      alert('successfully authenticated')
+      this.router.navigate([AUTH_SUCCESS_ROUTE])
+    } catch (e) {
+      alert(`something failed with signin ${e}`)
+    } finally {
+
+    }
   }
 
   async signUp(email: string, password: string, displayName: string, photoURL: string = ''){
     try {
       let { user } = await this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
+
+      console.log('submitting display name', displayName)
   
       await user.updateProfile({ displayName, photoURL })
 
-      this.currentUser = user
+      console.log('signed up with user', user)
 
       // TODO: handle post signup.
       alert('successfully authenticated')
+      this.router.navigate([AUTH_SUCCESS_ROUTE])
     } catch (e) {
       alert('something failed with signup')
     } finally {
@@ -37,7 +63,8 @@ export default class AuthService {
     }
   }
 
-  signOut(){
-    this.currentUser = {}
+  async signOut(){
+    await this.fireAuth.auth.signOut()
+    this.router.navigate([LOGOUT_ROUTE])
   }
 }

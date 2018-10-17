@@ -1,6 +1,24 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <nav></nav>
-  <router-outlet></router-outlet>
+
+<div *ngIf="!appReady; else app">
+  <h1>LOADING!!!!</h1>
+  <h1>LOADING!!!!</h1>
+  <h1>LOADING!!!!</h1>
+  <h1>LOADING!!!!</h1>
+  <h1>LOADING!!!!</h1>
+  <h1>LOADING!!!!</h1>
+  <h1>LOADING!!!!</h1>
+  <h1>LOADING!!!!</h1>
 </div>
+
+<div *ngIf="fuck | async">
+  fUCCCCK
+</div>
+
+<ng-template #app>
+  <div style="text-align:center">
+    <nav></nav>
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>
 
