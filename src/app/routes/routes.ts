@@ -8,12 +8,18 @@ import { SignupComponent } from '../screens/signup/signup.component';
 import { AuthResolver } from '../resolvers/auth.resolver';
 import { SigninComponent } from '../screens/signin/signin.component';
 import { AuthGuard } from '../services/auth.guard';
+import { FeedComponent } from '../screens/feed/feed.component';
+import { AuthedGuard } from '../services/authed.guard';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'signup', component: SignupComponent},
-  { path: 'signin', component: SigninComponent},
+  { path: '', 
+    canActivateChild: [AuthedGuard],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'signup', component: SignupComponent},
+      { path: 'signin', component: SigninComponent},
+  ]},
   { 
     path: '',
     canActivateChild: [AuthGuard],  
@@ -21,6 +27,7 @@ const routes: Routes = [
       { path: 'user', component: UserComponent },
       { path: 'album', component: CreateAlbumComponent },
       { path: 'albums', component: AlbumComponent },
+      { path: 'feed', component: FeedComponent },
     ]
   },
   { path: '**', redirectTo: ''},

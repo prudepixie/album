@@ -20,6 +20,9 @@ import { AuthResolver } from './resolvers/auth.resolver';
 import AuthThirdPartyProviderService from './services/auth.third.provider';
 import { AuthGuard } from './services/auth.guard';
 import { FormErrorComponent } from './shared/errors/form-error/form-error.component';
+import { FeedComponent } from './screens/feed/feed.component';
+import { AuthedGuard } from './services/authed.guard'
+import FeedService from './services/feed.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { FormErrorComponent } from './shared/errors/form-error/form-error.compon
     AlbumComponent,
     SignupComponent,
     SigninComponent,
-    FormErrorComponent
+    FormErrorComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,7 @@ import { FormErrorComponent } from './shared/errors/form-error/form-error.compon
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [AuthService, AuthResolver, AuthThirdPartyProviderService, AuthGuard],
+  providers: [AuthService, AuthResolver, AuthThirdPartyProviderService, AuthGuard, AuthedGuard, FeedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
