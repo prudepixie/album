@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Album, Photo } from 'src/app/album';
+import { createId } from '../../../helpers/create-id'
 
 @Component({
   selector: 'create-album',
@@ -58,6 +59,7 @@ export class CreateAlbumComponent implements OnInit {
 
 
     let newAlbum = new Album (
+      createId(),
       album.name,
       album.description,
       album.date,

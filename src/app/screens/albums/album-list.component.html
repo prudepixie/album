@@ -1,5 +1,6 @@
 <h3>Albums</h3>
 <div *ngFor="let album of albums">
+  <a routerLink="/albums/{{album.id}}"></a>
   {{ album.name }} - {{ album.date}}
   <p> {{ album.description }} </p>
   <hr>
