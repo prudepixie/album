@@ -1,5 +1,16 @@
-<ul>
-  <li><a routerLink= '/album'>New Album</a></li>
-  <li><a routerLink='/user'>User</a></li>
+
+<ul *ngIf="!currentUser; else authenticatedNav">
   <li><a routerLink='/signup'>Signup</a></li>
+  <li><a routerLink='/signin'>Signin</a></li>
 </ul>
+
+<ng-template #authenticatedNav>
+  <h2>You're logged in as {{ currentUser.email }} - {{ currentUser.displayName }}</h2>
+  <ul>
+    <li><a routerLink= '/album'>New Album</a></li>
+    <li><a routerLink='/user'>User</a></li>
+    <li><a routerLink='/profile'>Profile</a></li>
+    <li><a (click)="signOut()">Sign Out</a></li>
+  </ul>
+</ng-template>
+

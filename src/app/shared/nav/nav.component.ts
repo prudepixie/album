@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import User from 'src/app/models/user.model';
+import AuthService from 'src/app/services/auth.service';
 
 @Component({
   selector: 'nav',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  currentUser: any
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.currentUser = this.authService.currentUser
+
+    this.authService.currentUserListener.subscribe((currentUser) => {
+      this.currentUser = currentUser
+    })
   }
 
+  signOut(){
+    this.authService.signOut()
+  }
 }

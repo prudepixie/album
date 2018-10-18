@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import AuthService from 'src/app/services/auth.service'
+import AuthThirdPartyProviderService from 'src/app/services/auth.third.provider';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { passwordValidator } from '../../helpers/form-validators'
 
 @Component({
   selector: 'app-signup',
@@ -8,19 +11,28 @@ import AuthService from 'src/app/services/auth.service'
 })
 export class SignupComponent implements OnInit {
 
-  items: string[]
-  email: string
-  password: string
-  displayName: string
-  photoUrl: string
+  signupForm: FormGroup
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private thirdPartyAuth: AuthThirdPartyProviderService) {
   }
 
   ngOnInit() {
+    this.signupForm = new FormGroup({
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, [Validators.required, Validators.pattern(passwordValidator()) ]),
+      'username': new FormControl(null, [Validators.required])
+    })
   }
 
   signup() {
-    this.authService.signUp(this.email, this.password, this.displayName, this.photoUrl)
+    console.log(this.signupForm)
+    if(this.signupForm.valid){
+      const { value: { email, password, username }} = this.signupForm
+      this.authService.signUp(email, password, username)
+    }
+  }
+
+  facebookLogin(){
+    this.thirdPartyAuth.signinWithFacebook()
   }
 }

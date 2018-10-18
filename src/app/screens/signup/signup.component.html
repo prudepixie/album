@@ -1,19 +1,58 @@
 <!-- TODO: replace with real form soon -->
-<h1>HOME TEST</h1>
-<div *ngFor="let item of items">
-  {{ item }}
-</div>
+<h1>SIGNUPPAGE</h1>
 
-<div>
-  email
-  <input [(ngModel)]="email" />
-</div>
-<div>
-  password
-  <input [(ngModel)]="password" />
-</div>
-<div>
-  username
-  <input [(ngModel)]="username" />
-</div>
-<button (click)="signup()">SIGNUP</button>
+<form
+  [formGroup]="signupForm"
+  (ngSubmit)="signup()">
+  <div>
+    <label for="email">email</label>
+    <input 
+      formControlName="email" 
+      name="email"/>
+    <div
+      *ngIf="!signupForm.valid && signupForm.get('email').touched">
+      <form-error
+        [formName]="signupForm"
+        fieldName="email"
+        errorName="required"
+        errorMessage="This field is required"></form-error>
+      <form-error 
+        [formName]="signupForm" 
+        fieldName="email" 
+        errorName="email" 
+        errorMessage="Not a valid email"></form-error>
+    </div>
+  </div>
+  <div>
+    <label for="password">password</label>
+    <input 
+      formControlName="password" 
+      name="password" 
+      type="password"/>
+    <div *ngIf="!signupForm.valid && signupForm.get('password').touched">
+      <form-error 
+        [formName]="signupForm" 
+        fieldName="password" 
+        errorName="required" 
+        errorMessage="This field is required">
+      </form-error>
+      <p class="error" *ngIf="signupForm.get('password').errors && signupForm.get('password').errors.pattern">Not a valid password</p>
+    </div>
+  </div>
+  <div>
+    <label for="username">username</label>
+    <input formControlName="username" name="username" />
+    <div 
+      *ngIf="!signupForm.valid && signupForm.get('username').touched">
+      <form-error 
+        [formName]="signupForm" 
+        fieldName="username" 
+        errorName="required" 
+        errorMessage="This field is required"></form-error>
+    </div>
+  </div>
+  <button>SIGNUP</button>
+</form>
+<br>
+<hr>
+<button (click)="facebookLogin()">LOGIN WITH FACEBOOK</button>
