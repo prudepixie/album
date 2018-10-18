@@ -22,5 +22,8 @@
       <input type="date" formControlName="date" value="2018-10-13">
     </label>
   </p>
+  <p>
+    <image-upload (uploadFinished)="onUploadFinished($event)"></image-upload>
+  </p>
   <button type="submit" [disabled]="!albumForm.valid">Submit</button>
 </form>

@@ -12,6 +12,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AlbumComponent } from './screens/album/album.component'
 import AuthService from './services/auth.service';
 import { SignupComponent } from './screens/signup/signup.component';
@@ -20,6 +22,7 @@ import { AuthResolver } from './resolvers/auth.resolver';
 import AuthThirdPartyProviderService from './services/auth.third.provider';
 import { AuthGuard } from './services/auth.guard';
 import { FormErrorComponent } from './shared/errors/form-error/form-error.component';
+import { ImageUploadModule } from "angular2-image-upload"
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { FormErrorComponent } from './shared/errors/form-error/form-error.compon
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    ImageUploadModule.forRoot()
   ],
   providers: [AuthService, AuthResolver, AuthThirdPartyProviderService, AuthGuard],
   bootstrap: [AppComponent]
