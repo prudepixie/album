@@ -45,14 +45,13 @@ export class CreateAlbumComponent implements OnInit {
   }
 
   onUploadFinished(event) {
-    
     this.uploadedPhotos.push(event.file);
   }
 
   addAlbumToDB() {
     let album = this.albumForm.value;
     let photosPath = [];
-    
+
     // add to storage
     this.uploadedPhotos.forEach((photo: Photo)=> {
       const path = `${album.name}/${photo.name}`;

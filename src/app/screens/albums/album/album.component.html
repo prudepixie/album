@@ -1,10 +1,9 @@
 <div *ngIf="album">
   <h3>{{album.name}}</h3>
   <p>{{album.date}}</p>
-  <div *ngFor="let url of photosUrl">
-    <li>{{url}}</li>
-   <img [src]="url"/>
+  <div class="photos">
+    <div *ngFor="let url of photosUrl">
+     <img [src]="url"/>
+    </div>
   </div>
-
-  <!-- <img src="https://firebasestorage.googleapis.com/v0/b/photoalbum-6788c.appspot.com/o/hi%2FIMG_2022.jpg?alt=media&token=10381bab-75c1-4dc8-9d40-d30a7072185a"> -->
 </div>

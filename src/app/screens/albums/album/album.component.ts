@@ -30,17 +30,14 @@ export class AlbumComponent implements OnInit {
     }).valueChanges()
       .subscribe(albums => {
        this.album = albums[0];
-
-       this.album.photos.forEach((photoPath) => {
-         this.storage.ref(photoPath).getDownloadURL().subscribe(url=> {
-           console.log('url', url)
-
-           this.photosUrl.push(url);
-         })
-       });
-
-       console.log('album', this.album);
-      });
+      if (this.album.photosPath) {
+        this.album.photosPath.forEach((photoPath) => {
+          this.storage.ref(photoPath).getDownloadURL().subscribe(url=> {
+            this.photosUrl.push(url);
+          })
+        });
+      }
+    });
   }
 
 }
