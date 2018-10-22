@@ -51,19 +51,22 @@ export class CreateAlbumComponent implements OnInit {
 
   addAlbumToDB() {
     let album = this.albumForm.value;
-
+    let photosPath = [];
+    
+    // add to storage
     this.uploadedPhotos.forEach((photo: Photo)=> {
       const path = `${album.name}/${photo.name}`;
       this.task = this.storage.upload(path, photo);
+      photosPath.push(path);
     });
 
-
+    // add to database 
     let newAlbum = new Album (
       createId(),
       album.name,
       album.description,
       album.date,
-      this.uploadedPhotos
+      photosPath
     );
     this.albums.push(newAlbum);
   }

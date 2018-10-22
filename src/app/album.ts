@@ -4,7 +4,7 @@ export class Album {
   public name: string,
   public description: string,
   public date: string,
-  public photos: Array<Photo>
+  public photosPath: Array<Photo>
  ) {}
 }
 
