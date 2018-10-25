@@ -26,7 +26,6 @@ const routes: Routes = [
     children: [ 
       { path: 'user', component: UserComponent },
       { path: 'album', component: CreateAlbumComponent },
-      { path: 'albums', component: AlbumComponent },
       { path: 'feed', component: FeedComponent },
       { path: 'albums', component: AlbumListComponent},
       { path: 'albums/:id', component: AlbumComponent}
