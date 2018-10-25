@@ -8,20 +8,28 @@ import { SignupComponent } from '../screens/signup/signup.component';
 import { AuthResolver } from '../resolvers/auth.resolver';
 import { SigninComponent } from '../screens/signin/signin.component';
 import { AuthGuard } from '../services/auth.guard';
+import { FeedComponent } from '../screens/feed/feed.component';
+import { AuthedGuard } from '../services/authed.guard';
 import { AlbumComponent } from '../screens/albums/album/album.component'
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'signup', component: SignupComponent},
-  { path: 'signin', component: SigninComponent},
+  { path: '', 
+    canActivateChild: [AuthedGuard],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'signup', component: SignupComponent},
+      { path: 'signin', component: SigninComponent},
+  ]},
   { 
     path: '',
     canActivateChild: [AuthGuard],  
     children: [ 
       { path: 'user', component: UserComponent },
       { path: 'album', component: CreateAlbumComponent },
+      { path: 'albums', component: AlbumComponent },
+      { path: 'feed', component: FeedComponent },
       { path: 'albums', component: AlbumListComponent},
-      {path: 'albums/:id', component: AlbumComponent}
+      { path: 'albums/:id', component: AlbumComponent}
     ]
   },
   { path: '**', redirectTo: ''},

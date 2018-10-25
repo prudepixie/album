@@ -5,7 +5,7 @@ import User from '../models/user.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
-const AUTH_SUCCESS_ROUTE = '/albums'
+const AUTH_SUCCESS_ROUTE = '/feed'
     , LOGOUT_ROUTE = '/'
 
 @Injectable()
@@ -17,17 +17,19 @@ export default class AuthService {
   }
 
   listenForAuthChanges(){
-    this.fireAuth.auth.onAuthStateChanged((user) => {
+    if(localStorage.getItem('currentUser')) this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
 
-      console.log('auth state changed..', user)
+    this.fireAuth.auth.onAuthStateChanged((user) => {
 
       if(!user){
         this.currentUser = null
+        localStorage.removeItem('currentUser')
         return this.currentUserListener.next(null)
       } 
 
       this.currentUser = new User(user.displayName, user.photoURL, user.email)
       this.currentUserListener.next(this.currentUser)
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
     })
   }
 
