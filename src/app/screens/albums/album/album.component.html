@@ -1,3 +1,9 @@
-<p>
-  album works!
-</p>
+<div *ngIf="album">
+  <h3>{{album.name}}</h3>
+  <p>{{album.date}}</p>
+  <div class="photos">
+    <div *ngFor="let url of photosUrl">
+     <img [src]="url"/>
+    </div>
+  </div>
+</div>
