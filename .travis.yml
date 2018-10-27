@@ -6,4 +6,4 @@ before_install:
   - docker build -t snly2386/album . 
 
 script:
-  - docker run snly2386/album npm run test -- --coverage
+  - docker run snly2386/album npm run test
