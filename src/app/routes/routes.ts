@@ -11,6 +11,7 @@ import { AuthGuard } from '../services/auth.guard';
 import { FeedComponent } from '../screens/feed/feed.component';
 import { AuthedGuard } from '../services/authed.guard';
 import { AlbumComponent } from '../screens/albums/album/album.component'
+import { ProflieComponent } from '../screens/proflie/proflie.component';
 
 const routes: Routes = [
   { path: '', 
@@ -29,7 +30,8 @@ const routes: Routes = [
       { path: 'albums', component: AlbumComponent },
       { path: 'feed', component: FeedComponent },
       { path: 'albums', component: AlbumListComponent},
-      { path: 'albums/:id', component: AlbumComponent}
+      { path: 'albums/:id', component: AlbumComponent},
+      { path: 'profile', component: ProflieComponent}
     ]
   },
   { path: '**', redirectTo: ''},

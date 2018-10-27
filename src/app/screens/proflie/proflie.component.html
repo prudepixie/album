@@ -1,0 +1,36 @@
+<h1>profile screen</h1>
+<h3>{{ currentUser.email }}</h3>
+  <div *ngIf="uploadedPhoto; else existingPhoto"> 
+    <img [src]="uploadedPhoto" alt="" style="width: 60px; height: 60px; border-radius: 50%">
+  </div>
+
+  <ng-template #existingPhoto>
+    <img 
+      [src]="photoUrl ? (photoUrl | async) : defaultPhoto" 
+      alt=""
+      style="width: 60px; height: 60px; border-radius: 50%">
+  </ng-template>
+<form 
+  [formGroup]="profileForm"
+  (ngSubmit)="updateProfile()">
+  <div>
+    <label>Username</label>
+    <input 
+      type="text" 
+      formControlName="displayName" 
+      [ngModel]="currentUser.displayName" 
+    />
+  </div>
+  <div>
+    <label>Photo</label>
+    <image-upload 
+      [max]="1"
+      (uploadFinished)="onUploadFinished($event)"
+      ></image-upload>
+    <input 
+      type="text" 
+      formControlName="photoURL" 
+      [ngModel]="currentUser.photoURL" />
+  </div>
+  <button>UPDATE</button>
+</form>

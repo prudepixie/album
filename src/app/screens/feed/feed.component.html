@@ -1,3 +1,5 @@
 <h1>feed page</h1>
 
-<button (click)="addToFeed()">ADD TO FEED</button>
+<div *ngFor="let item of activityFeedItems | async ">
+  {{ item.message }}
+</div>
