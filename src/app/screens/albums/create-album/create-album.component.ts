@@ -5,6 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Album, Photo } from 'src/app/album';
 import { createId } from '../../../helpers/create-id'
+import { ImageUploadService } from 'src/app/services/image-upload.service';
 
 @Component({
   selector: 'create-album',
@@ -21,7 +22,8 @@ export class CreateAlbumComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private db: AngularFireDatabase,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private uploadService: ImageUploadService
   ) { 
     this.albums = db.list('/albums')
   }
