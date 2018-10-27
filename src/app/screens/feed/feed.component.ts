@@ -7,17 +7,11 @@ import FeedService from 'src/app/services/feed.service';
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
+  activityFeedItems: any
 
   constructor(private feedService: FeedService) { }
 
   ngOnInit() {
-
-  }
-
-  addToFeed(){
-    // this.firebaseDb.list('/activity').push({
-    //   description: 'some activity',
-    //   type: 'some type'
-    // })
+    this.activityFeedItems = this.feedService.getFeedItems()
   }
 }

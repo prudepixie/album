@@ -26,7 +26,8 @@ import { FeedComponent } from './screens/feed/feed.component';
 import { AuthedGuard } from './services/authed.guard'
 import FeedService from './services/feed.service';
 import { ImageUploadModule } from "angular2-image-upload";
-import { AlbumComponent } from './screens/albums/album/album.component'
+import { AlbumComponent } from './screens/albums/album/album.component';
+import { ProflieComponent } from './screens/proflie/proflie.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AlbumComponent } from './screens/albums/album/album.component'
     SigninComponent,
     FormErrorComponent,
     FeedComponent,
-    AlbumComponent
+    AlbumComponent,
+    ProflieComponent,
   ],
   imports: [
     BrowserModule,

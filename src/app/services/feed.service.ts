@@ -8,8 +8,8 @@ export default class FeedService {
   constructor(private fireDb: AngularFireDatabase) {
 
   }
-  
-  addToFeed(){
-    
+
+  getFeedItems(){
+    return this.fireDb.list('/activity').valueChanges()
   }
 }

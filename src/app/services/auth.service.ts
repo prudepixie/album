@@ -4,16 +4,17 @@ import { MethodCall } from '@angular/compiler';
 import User from '../models/user.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 const AUTH_SUCCESS_ROUTE = '/feed'
     , LOGOUT_ROUTE = '/'
 
 @Injectable()
 export default class AuthService {
-  currentUser: User = null
+  currentUser: any
   currentUserListener = new Subject()
 
-  constructor(private fireAuth: AngularFireAuth, private router: Router){
+  constructor(private fireAuth: AngularFireAuth, private router: Router, private storage: AngularFireStorage){
   }
 
   listenForAuthChanges(){
@@ -27,7 +28,7 @@ export default class AuthService {
         return this.currentUserListener.next(null)
       } 
 
-      this.currentUser = new User(user.displayName, user.photoURL, user.email)
+      this.currentUser = user
       this.currentUserListener.next(this.currentUser)
       localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
     })
@@ -48,12 +49,8 @@ export default class AuthService {
   async signUp(email: string, password: string, displayName: string, photoURL: string = ''){
     try {
       let { user } = await this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
-
-      console.log('submitting display name', displayName)
   
       await user.updateProfile({ displayName, photoURL })
-
-      console.log('signed up with user', user)
 
       // TODO: handle post signup.
       alert('successfully authenticated')
@@ -68,5 +65,24 @@ export default class AuthService {
   async signOut(){
     await this.fireAuth.auth.signOut()
     this.router.navigate([LOGOUT_ROUTE])
+  }
+
+  async updateProfile({ displayName = null, photoURL = null }){
+    console.log('photho URL', photoURL)
+    try {
+      let res = await this.currentUser.updateProfile({ displayName })
+
+      if(photoURL){
+        this.storage.ref(`/users/userphoto-${this.currentUser.email}`).put(photoURL)
+      }
+    } catch (e) {
+      console.log('error', e)
+    } finally {
+      console.log("dd it update", this.currentUser)
+    }
+  }
+
+  getUserPhoto(){
+    return this.storage.ref(`/users/userphoto-${this.currentUser.email}`).getDownloadURL()
   }
 }
