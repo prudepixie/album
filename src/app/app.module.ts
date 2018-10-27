@@ -27,6 +27,7 @@ import { AuthedGuard } from './services/authed.guard'
 import FeedService from './services/feed.service';
 import { ImageUploadModule } from "angular2-image-upload";
 import { AlbumComponent } from './screens/albums/album/album.component'
+import { ImageUploadService } from 'src/app/services/image-upload.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,15 @@ import { AlbumComponent } from './screens/albums/album/album.component'
     AngularFireStorageModule,
     ImageUploadModule.forRoot()
   ],
-  providers: [AuthService, AuthResolver, AuthThirdPartyProviderService, AuthGuard, AuthedGuard, FeedService],
+  providers: [
+    AuthService, 
+    AuthResolver, 
+    AuthThirdPartyProviderService, 
+    AuthGuard, 
+    AuthedGuard, 
+    FeedService,
+    ImageUploadService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

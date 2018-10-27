@@ -4,3 +4,7 @@ div.photos {
 img {
   width: 300px;
 }
+.photo-upload {
+  width: 200px;
+  margin: 0 auto;
+}

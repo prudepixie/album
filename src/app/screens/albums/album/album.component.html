@@ -1,7 +1,14 @@
 <div *ngIf="album">
   <h3>{{album.name}}</h3>
   <p>{{album.date}}</p>
-  <div class="photos">
+  <div *ngIf="!photosUrl.length">
+    No Photos in this album, upload some photos!
+  </div>
+  <div class="photo-upload">
+    <image-upload (uploadFinished)="onUploadFinished($event)"></image-upload>
+    <button (click)="addPhotosToAlbum()"></button>
+  </div>
+  <div *ngIf="photosUrl.length" class="photos">
     <div *ngFor="let url of photosUrl">
      <img [src]="url"/>
     </div>
